@@ -12,14 +12,31 @@ var solarized_cyan    = "#2aa198";
 var solarized_green   = "#859900";
 
 
-
-var phrase = ["kick", "cat", "spin"];
 var i = 0;
 
 
+$('.modal').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .5, // Opacity of modal background
+    in_duration: 300, // Transition in duration
+    out_duration: 200, // Transition out duration
+    starting_top: '4%', // Starting top style attribute
+    ending_top: '10%', // Ending top style attribute
+    ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+    },
+    complete: function() {
+        loopFunction()
+    } // Callback for Modal close
+  }
+);
 
-loopFunction()
+
+
+
+
 function loopFunction(){
+
+    var phrase = $('#textarea1').val().split(' ')
 
     if (i < phrase.length){
 
@@ -38,13 +55,26 @@ function loopFunction(){
 function callAPI(word){
     $.get('http://api.pearson.com/v2/dictionaries/entries?headword=' + word).done(function(response){
 
-        var partOfSpeech = response.results[0].part_of_speech;
+        var total = response.total;
+        var partOfSpeech;
+
+
+        if (total > 0){
+            partOfSpeech = response.results[0].part_of_speech;
+        } else {
+            partOfSpeech = undefined;
+        }
         console.log(partOfSpeech)
 
-        changeColor(partOfSpeech,word);
+    changeColor(partOfSpeech,word);
+
+
+
+
 
     }) //$.get
-}
+
+} //callAPI
 
 
 
@@ -62,7 +92,7 @@ function changeColor(partOfSpeech, word){
 
     } else if (partOfSpeech === 'noun'){
         $(".solarizedTxt").append("<span style=color:" + solarized_green + ">" + word + "</span>")
-
+/*
     } else if (partOfSpeech === 'adjective'){
         $(".solarizedTxt").append("<span style=color:" + solarized_violet + ">" + word + "</span>")
 
@@ -80,10 +110,12 @@ function changeColor(partOfSpeech, word){
 
     } else if (partOfSpeech === 'determiner'){
         $(".solarizedTxt").append("<span style=color:" + solarized_magenta + ">" + word + "</span>")
-
+*/
     } else if (partOfSpeech === undefined){
-        $(".solarizedTxt").append("<span style=color:" + solarized_baseDark + ">" + word + "</span>")
-    }
+        $(".solarizedTxt").append("<span style=color:" + solarized_baseZero + ">" + word + "</span>")
+    } else {
+            $(".solarizedTxt").append("<span style=color:" + solarized_baseZero + ">" + word + "</span>")
+        }
 
 
     // loops back up again
