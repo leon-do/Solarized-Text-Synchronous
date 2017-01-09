@@ -91,7 +91,7 @@ function changeColor(partOfSpeech, word){
         $(".solarizedTxt").append("<span style=color:" + solarized_orange + ">" + word + "</span>")
 
     } else if (partOfSpeech === 'noun'){
-        $(".solarizedTxt").append("<span style=color:" + solarized_green + ">" + word + "</span>")
+        $(".solarizedTxt").append("<span style=color:" + solarized_yellow + ">" + word + "</span>")
 /*
     } else if (partOfSpeech === 'adjective'){
         $(".solarizedTxt").append("<span style=color:" + solarized_violet + ">" + word + "</span>")
@@ -116,7 +116,6 @@ function changeColor(partOfSpeech, word){
     } else {
             $(".solarizedTxt").append("<span style=color:" + solarized_baseZero + ">" + word + "</span>")
         }
-
 
     // loops back up again
     i++;
