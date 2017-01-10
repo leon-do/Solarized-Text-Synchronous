@@ -53,7 +53,7 @@ function loopFunction(){
 
 
 function callAPI(word){
-    $.get('http://api.pearson.com/v2/dictionaries/entries?headword=' + word).done(function(response){
+    $.get('https://api.pearson.com/v2/dictionaries/entries?headword=' + word).done(function(response){
 
         var total = response.total;
         var partOfSpeech;
